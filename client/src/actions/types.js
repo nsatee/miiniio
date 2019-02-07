@@ -1,0 +1,1 @@
+export const RECEIVED_VALUE = 'RECEIVED_VALUE';

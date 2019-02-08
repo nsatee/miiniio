@@ -7,18 +7,32 @@ class Signup extends Component {
         this.props.receivedValue(e.target);
     };
 
-    handleSubmit = (e) => {
+    handleSubmit = e => {
         e.preventDefault();
-        const { username, password, email } = this.props;
-        this.props.signupNewUser({ username, password, email });
-    }
+        const {
+            username,
+            password,
+            email,
+            firstname,
+            lastname,
+            confirmPassword
+        } = this.props;
+        this.props.signupNewUser({
+            username,
+            password,
+            email,
+            firstname,
+            lastname,
+            confirmPassword
+        });
+    };
 
     render() {
         return (
             <div className="signup-wrapper">
                 <h1 className="header">sign up</h1>
-                <form 
-                    onSubmit={this.handleSubmit.bind(this)} 
+                <form
+                    onSubmit={this.handleSubmit.bind(this)}
                     className="form-container"
                 >
                     <div className="field-wrapper">
@@ -33,7 +47,7 @@ class Signup extends Component {
 
                         <input
                             type="text"
-                            name="fastname"
+                            name="lastname"
                             className="field"
                             placeholder="Lastname"
                             value={this.props.fastname}
@@ -54,7 +68,7 @@ class Signup extends Component {
 
                     <div className="field-wrapper">
                         <input
-                            type="email"
+                            type="text"
                             name="email"
                             className="field"
                             placeholder="Email"
@@ -84,9 +98,13 @@ class Signup extends Component {
                         />
                     </div>
 
-
                     <div className="field-wrapper flex center">
-                        <button type="submit" className="btn blue auth-signup_btn">Register</button>
+                        <button
+                            type="submit"
+                            className="btn blue auth-signup_btn"
+                        >
+                            Register
+                        </button>
                     </div>
                 </form>
             </div>
@@ -95,8 +113,15 @@ class Signup extends Component {
 }
 
 const mapStateToProps = ({ user }) => {
-    const { username, password, email } = user;
-    return { username, password, email };
+    const {
+        username,
+        password,
+        email,
+        firstname,
+        lastname,
+        confirmPassword
+    } = user;
+    return { username, password, email, firstname, lastname, confirmPassword };
 };
 
 export default connect(

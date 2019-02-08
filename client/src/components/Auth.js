@@ -1,8 +1,8 @@
-import React, { Component} from 'react';
+import React, { Component } from "react";
 
-import Signup from './Signup'
-import Signin from './Signin';
-import Icon from '../svg';
+import Signup from "./Signup";
+import Signin from "./Signin";
+import Icon from "../svg";
 
 class Auth extends Component {
     render() {
@@ -11,7 +11,7 @@ class Auth extends Component {
                 <div className="wrapper full-width">
                     <div className="section auth-logo_container">
                         <div className="block w-height center">
-                            <Icon name="logo" fill="#fff"/>
+                            <Icon name="logo" fill="#fff" />
                         </div>
                     </div>
                     <div className="section">

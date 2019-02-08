@@ -9,7 +9,9 @@ router.post('/new_user', (req, res) => {
     const {
         username,
         email,
-        password
+        password,
+        firstname,
+        lastname
     } = req.body;
 
     User.findOne({
@@ -23,7 +25,9 @@ router.post('/new_user', (req, res) => {
             const newUser = new User({
                 username: username,
                 password: password,
-                email: email
+                email: email,
+                firstname: firstname,
+                lastname: lastname
             });
 
             newUser.save((err, savedUser) => {

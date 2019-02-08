@@ -1,1 +1,2 @@
 export const RECEIVED_VALUE = 'RECEIVED_VALUE';
+export const INVALID_VALUE = 'INVALID_VALUE';

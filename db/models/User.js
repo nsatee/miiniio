@@ -13,7 +13,9 @@ const userSchema = new Schema({
     },
     email: {
         type: String
-    }
+    },
+    firstname: String,
+    lastname: String,
 });
 
 // define schema methods

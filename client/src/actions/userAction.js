@@ -28,27 +28,27 @@ export const signupNewUser = userInfo => {
 
         if (!checkLength(username, 6)) {
             console.log(error);
-            error.push({username: "At lease 6 characters for username"});
+            error.push("At lease 6 characters for username");
         } 
         if (!checkLength(password, 6)) {
             console.log(error);
-            error.push({password: "At lease 6 characters for password"});
+            error.push("At lease 6 characters for password");
         }
         if (password !== confirmPassword) {
             console.log(error);
-            error.push({confirmPassword: "Confirm password does not match with the password"});
+            error.push("Confirm password does not match with the password");
         }
         if (!EmailValidator.validate(email)) {
             console.log(error);
-            error.push({email: "Email is invalid"});
+            error.push("Email is invalid");
         }
         if (firstname === "") {
             console.log(error);
-            error.push({firstname: "Please enter your firstname"});
+            error.push("Please enter your firstname");
         }  
         if (lastname === "") {
             console.log(error);
-            error.push({lastname: "Please enter your lastname"});
+            error.push("Please enter your lastname");
         }  
 
 

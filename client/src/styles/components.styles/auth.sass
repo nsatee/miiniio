@@ -31,3 +31,19 @@
         .auth-signin_btn
             padding: auto 30px
             font-size: 12px
+
+    &-error
+        width: 100%
+        height: auto
+        position: absolute
+        background: $red
+        text-align: center
+        color: $white
+        padding: 10px
+        line-height: 1.4em
+        transition: .2s
+        top: -100%
+
+        &.error
+            transition: .2s
+            top: 0

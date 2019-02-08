@@ -7,7 +7,7 @@ const initState = {
     password: "",
     email: "",
     confirmPassword: "",
-    error: {}
+    error: []
 };
 
 export default (state = initState, action) => {

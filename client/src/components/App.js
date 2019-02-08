@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import Signup from "./Signup";
 import { connect } from 'react-redux';
 import { receivedValue } from "../actions";
+import Auth from "./Auth";
 
 class App extends Component {
     render() {
         console.log(this.props)
         return (
             <div className="App">
-                <Signup/>
+                <Auth />
             </div>
         );
     }

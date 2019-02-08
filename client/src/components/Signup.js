@@ -15,30 +15,79 @@ class Signup extends Component {
 
     render() {
         return (
-            <div>
-                <form onSubmit={this.handleSubmit.bind(this)}>
-                    <input
-                        type="text"
-                        name="username"
-                        placeholder="Username"
-                        value={this.props.username}
-                        onChange={this.handleValChange.bind(this)}
-                    />
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        value={this.props.email}
-                        onChange={this.handleValChange.bind(this)}
-                    />
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        value={this.props.password}
-                        onChange={this.handleValChange.bind(this)}
-                    />
-                    <button type="submit">Register</button>
+            <div className="signup-wrapper">
+                <h1 className="header">sign up</h1>
+                <form 
+                    onSubmit={this.handleSubmit.bind(this)} 
+                    className="form-container"
+                >
+                    <div className="field-wrapper">
+                        <input
+                            type="text"
+                            name="firstname"
+                            className="field"
+                            placeholder="Firstname"
+                            value={this.props.firstname}
+                            onChange={this.handleValChange.bind(this)}
+                        />
+
+                        <input
+                            type="text"
+                            name="fastname"
+                            className="field"
+                            placeholder="Lastname"
+                            value={this.props.fastname}
+                            onChange={this.handleValChange.bind(this)}
+                        />
+                    </div>
+
+                    <div className="field-wrapper">
+                        <input
+                            type="text"
+                            name="username"
+                            className="field"
+                            placeholder="Username"
+                            value={this.props.username}
+                            onChange={this.handleValChange.bind(this)}
+                        />
+                    </div>
+
+                    <div className="field-wrapper">
+                        <input
+                            type="email"
+                            name="email"
+                            className="field"
+                            placeholder="Email"
+                            value={this.props.email}
+                            onChange={this.handleValChange.bind(this)}
+                        />
+                    </div>
+                    <div className="field-wrapper">
+                        <input
+                            type="password"
+                            name="password"
+                            className="field"
+                            placeholder="Password"
+                            value={this.props.password}
+                            onChange={this.handleValChange.bind(this)}
+                        />
+                    </div>
+
+                    <div className="field-wrapper">
+                        <input
+                            type="password"
+                            name="confirmPassword"
+                            className="field"
+                            placeholder="Confirm password"
+                            value={this.props.confirmPassword}
+                            onChange={this.handleValChange.bind(this)}
+                        />
+                    </div>
+
+
+                    <div className="field-wrapper flex center">
+                        <button type="submit" className="btn blue auth-signup_btn">Register</button>
+                    </div>
                 </form>
             </div>
         );

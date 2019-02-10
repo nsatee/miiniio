@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as EmailValidator from 'email-validator';
-import { RECEIVED_VALUE, INVALID_VALUE } from "./types";
+import { RECEIVED_VALUE, INVALID_VALUE, SUCCESS_SUBMITTING } from "./types";
 
 export const receivedValue = val => {
     return {
@@ -52,13 +52,24 @@ export const signupNewUser = userInfo => {
         }  
 
 
-        if (!error) {
+        if (error.length === 0) {
+            console.log('yay');
             axios.post('/api/new_user', userInfo)
             .then(res => {
-                console.log(res);
+                dispatch({type: SUCCESS_SUBMITTING, payload: res});
             });
         } else {
+            console.log(error.length);
             return dispatch({type: INVALID_VALUE, payload: error})
         }
     };
 };
+
+export const signinUser = userInfo => {
+    return () => {
+        axios.post('/api/login', userInfo)
+    .then(() => {
+        console.log('yay');
+    });
+    }
+}

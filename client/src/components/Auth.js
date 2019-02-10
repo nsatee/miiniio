@@ -16,10 +16,7 @@ class Auth extends Component {
                             <Icon name="logo" fill="#fff" />
                         </div>
                     </div>
-                    <div className="section">
-                        <div className="block auth-signin flex right">
-                            <Signin />
-                        </div>
+                    <div className="section flex center">
                         <div className="block">
                             <Signup />
                         </div>

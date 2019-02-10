@@ -50,7 +50,7 @@ class Signup extends Component {
                             name="lastname"
                             className="field"
                             placeholder="Lastname"
-                            value={this.props.fastname}
+                            value={this.props.lastname}
                             onChange={this.handleValChange.bind(this)}
                         />
                     </div>
@@ -98,13 +98,14 @@ class Signup extends Component {
                         />
                     </div>
 
-                    <div className="field-wrapper flex center">
+                    <div className="field-wrapper flex center wrap column">
                         <button
                             type="submit"
                             className="btn blue auth-signup_btn"
                         >
                             Register
                         </button>
+                        <a href="/" className="signin-link" >Already had an account? Signin</a>
                     </div>
                 </form>
             </div>

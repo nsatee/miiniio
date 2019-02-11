@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { receivedValue, signupNewUser } from "../actions";
+import { Link, Redirect } from "react-router-dom";
 
 class Signup extends Component {
     handleValChange = e => {
@@ -25,11 +26,13 @@ class Signup extends Component {
             lastname,
             confirmPassword
         });
+        return <Redirect to="/signup" />
     };
 
     render() {
+        console.log(this.props)
         return (
-            <div className="signup-wrapper">
+            <div className="auth-form">
                 <h1 className="header">sign up</h1>
                 <form
                     onSubmit={this.handleSubmit.bind(this)}
@@ -105,7 +108,12 @@ class Signup extends Component {
                         >
                             Register
                         </button>
-                        <a href="/" className="signin-link" >Already had an account? Signin</a>
+                        <Link
+                            to="/signin"
+                            className="extra-link"
+                        >
+                            Already had an account? Signin
+                        </Link>
                     </div>
                 </form>
             </div>

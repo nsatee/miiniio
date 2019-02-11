@@ -1,3 +1,7 @@
 export const RECEIVED_VALUE = 'RECEIVED_VALUE';
 export const INVALID_VALUE = 'INVALID_VALUE';
 export const SUCCESS_SUBMITTING = 'SUCCESS_SUBMITTING';
+export const SUCCESS_LOGIN = 'SUCCESS_LOGIN';
+export const IS_LOGED_IN = 'IS_LOGED_IN';
+export const LOGOUT = 'LOGOUT';
+export const LOGIN_FAILED = 'LOGIN_FAILED';

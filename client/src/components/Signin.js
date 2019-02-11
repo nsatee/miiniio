@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Icon from "../svg";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { receivedValue, signinUser } from '../actions'
+import { receivedValue, signinUser } from "../actions";
 
 class Signin extends Component {
     handleValChange = e => {
@@ -10,21 +10,22 @@ class Signin extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        const {usernameSignin, passwordSignin} = this.props;
+        const { usernameSignin, passwordSignin } = this.props;
         const info = {
             username: usernameSignin,
             password: passwordSignin
-        }
-        console.log(info)
+        };
         this.props.signinUser(info);
     }
 
     render() {
+        if (this.props.currentUser !== null) {
+            return <Redirect to="/" />
+        }
+
         return (
-            <div className="signin-wrapper">
-                <div className="signin-logo">
-                    <Icon name="logo" fill="#d1d1d1" />
-                </div>
+            <div className="auth-form">
+                <h1 className="header">sign In</h1>
                 <form
                     onSubmit={this.handleSubmit.bind(this)}
                     className="form-container"
@@ -38,7 +39,8 @@ class Signin extends Component {
                             value={this.props.usernameSignin}
                             onChange={this.handleValChange.bind(this)}
                         />
-
+                    </div>
+                    <div className="field-wrapper">
                         <input
                             type="password"
                             name="passwordSignin"
@@ -47,13 +49,17 @@ class Signin extends Component {
                             value={this.props.passwordSignin}
                             onChange={this.handleValChange.bind(this)}
                         />
-
+                    </div>
+                    <div className="field-wrapper flex center wrap column">
                         <button
                             type="submit"
                             className="btn blue auth-signin_btn"
                         >
                             Login
                         </button>
+                        <Link to="/signup" className="extra-link">
+                            Create an acount
+                        </Link>
                     </div>
                 </form>
             </div>
@@ -62,8 +68,11 @@ class Signin extends Component {
 }
 
 const mapStateToProps = ({ user }) => {
-    const { usernameSignin, passwordSignin } = user;
-    return { usernameSignin, passwordSignin };
+    const { usernameSignin, passwordSignin, currentUser } = user;
+    return { usernameSignin, passwordSignin, currentUser };
 };
 
-export default connect(mapStateToProps, {receivedValue, signinUser})(Signin);
+export default connect(
+    mapStateToProps,
+    { receivedValue, signinUser }
+)(Signin);

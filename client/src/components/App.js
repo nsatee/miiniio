@@ -1,20 +1,37 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux';
-import { receivedValue } from "../actions";
+import { connect } from "react-redux";
+import { getUser } from "../actions";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
+import Mainpage from "./Mainpage";
 import Auth from "./Auth";
 
+
 class App extends Component {
+
+    componentDidMount() {
+        this.props.getUser();
+    }
+
     render() {
         return (
             <div className="App">
-                <Auth />
+                <BrowserRouter>
+                    <Switch>
+                        <Route exact path="/" component={Mainpage} />
+                        <Route exact path="/signin" render={() => <Auth isSignin={true} />}  />
+                        <Route exact path="/signup" render={() => <Auth isSignin={false} />}  />
+                    </Switch>
+                </BrowserRouter>
             </div>
         );
     }
 }
 
 const mapStateToProps = ({ user }) => {
-    return { user }
-}
+    return { user };
+};
 
-export default connect(mapStateToProps, { receivedValue })(App);
+export default connect(
+    mapStateToProps,
+    { getUser }
+)(App);

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 
 import Signup from "./Signup";
 import Signin from "./Signin";
@@ -6,7 +7,22 @@ import Icon from "../svg";
 import ErrorAuth from "./ErrorsAuth";
 
 class Auth extends Component {
+    state = {
+        isSignin: this.props.isSignin
+    };
+
+    handleAuthComponent() {
+        if (this.props.isSignin) {
+            return <Signin />;
+        } else {
+            return <Signup />;
+        }
+    }
+
     render() {
+        if (this.props.isLoading) {
+            return <div></div>
+        }
         return (
             <div className="container auth">
                 <div className="wrapper full-width">
@@ -18,7 +34,7 @@ class Auth extends Component {
                     </div>
                     <div className="section flex center">
                         <div className="block">
-                            <Signup />
+                            {this.handleAuthComponent()}
                         </div>
                     </div>
                 </div>
@@ -27,4 +43,10 @@ class Auth extends Component {
     }
 }
 
-export default Auth;
+
+const mapStateToProps = ({ user }) => {
+    const { isLoading } = user;
+    return { isLoading };
+};
+
+export default connect(mapStateToProps)(Auth);

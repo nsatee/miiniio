@@ -3,6 +3,14 @@ const router = express.Router();
 const User = require("../../db/models/User");
 const passport = require("../../services");
 
+router.get("/user", (req, res) => {
+    if (req.user) {
+        res.json({ currentUser: req.user });
+    } else {
+        res.json({ currentUser: null });
+    }
+});
+
 router.post("/new_user", (req, res) => {
     console.log(req.body);
     const { username, email, password, firstname, lastname } = req.body;
@@ -34,12 +42,39 @@ router.post("/new_user", (req, res) => {
     );
 });
 
-router.post("/login", passport.authenticate("local"), (req, res) => {
-    console.log(req.user);
-    const userInfo = {
-        username: req.user.username
-    };
-    res.send(userInfo)
+router.post("/login", function(req, res, next) {
+    passport.authenticate("local", function(err, user) {
+        if (err) {
+            return next(err); // will generate a 500 error
+        }
+        // Generate a JSON response reflecting authentication status
+        if (!user) {
+            return res.send({
+                success: false,
+                message: "Incorrect username or password"
+            });
+        }
+        
+        req.login(user, loginErr => {
+            if (loginErr) {
+                return next(loginErr);
+            }
+            return res.send({
+                success: true,
+                message: "authentication succeeded"
+            });
+        });
+    })(req, res, next);
+});
+
+
+router.post("/logout", (req, res) => {
+    if (req.user) {
+        req.logout();
+        res.send({ msg: "logging out" });
+    } else {
+        res.send({ msg: "no user to log out" });
+    }
 });
 
 module.exports = router;

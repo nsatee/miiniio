@@ -1,26 +1,49 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getUser } from "../actions";
-import { Switch, Route, BrowserRouter } from "react-router-dom";
+import { Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
 import Mainpage from "./Mainpage";
-import Auth from "./Auth";
-
+import Auth from "./authComponents/Auth";
+import UserInfo from "./mainComponents/UserInfo";
+import MainNav from "./mainComponents/MainNav";
 
 class App extends Component {
-
     componentDidMount() {
         this.props.getUser();
+    }
+
+    isLogedIn() {
+        if (this.props.currentUser !== null) {
+            return <MainNav />;
+        }
     }
 
     render() {
         return (
             <div className="App">
                 <BrowserRouter>
-                    <Switch>
-                        <Route exact path="/" component={Mainpage} />
-                        <Route exact path="/signin" render={() => <Auth isSignin={true} />}  />
-                        <Route exact path="/signup" render={() => <Auth isSignin={false} />}  />
-                    </Switch>
+                    <div>
+                        {this.isLogedIn()}
+                        <Switch>
+                            <Route exact path="/" component={Mainpage} />
+                            <Route
+                                exact
+                                path="/signup"
+                                render={() => <Auth isSignin={false} />}
+                            />
+                            <Route
+                                exact
+                                path="/userinfo"
+                                render={() =>
+                                    this.props.currentUser !== null ? (
+                                        <UserInfo />
+                                    ) : (
+                                        <Redirect to="/" />
+                                    )
+                                }
+                            />
+                        </Switch>
+                    </div>
                 </BrowserRouter>
             </div>
         );
@@ -28,7 +51,8 @@ class App extends Component {
 }
 
 const mapStateToProps = ({ user }) => {
-    return { user };
+    const { currentUser } = user;
+    return { currentUser };
 };
 
 export default connect(

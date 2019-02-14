@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Signup from "./Signup";
 import Signin from "./Signin";
-import Icon from "../svg";
+import Icon from "../../svg";
 import ErrorAuth from "./ErrorsAuth";
 
 class Auth extends Component {

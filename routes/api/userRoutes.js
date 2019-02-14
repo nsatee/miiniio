@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../../db/models/User");
+const Post = require("../../db/models/Post");
 const passport = require("../../services");
 
 router.get("/user", (req, res) => {
@@ -54,7 +55,7 @@ router.post("/login", function(req, res, next) {
                 message: "Incorrect username or password"
             });
         }
-        
+
         req.login(user, loginErr => {
             if (loginErr) {
                 return next(loginErr);
@@ -67,7 +68,6 @@ router.post("/login", function(req, res, next) {
     })(req, res, next);
 });
 
-
 router.post("/logout", (req, res) => {
     if (req.user) {
         req.logout();
@@ -75,6 +75,34 @@ router.post("/logout", (req, res) => {
     } else {
         res.send({ msg: "no user to log out" });
     }
+});
+
+router.get("/userinfo", (req, res) => {
+    User.findById(req.user.id, (err, user) => {
+        res.send(user);
+    });
+});
+
+router.post("/create_post", (req, res) => {
+    const newPost = new Post({
+        title: req.body.title,
+        body: req.body.body,
+        user: req.user.id
+    });
+
+    newPost.save((err, savedPost) => {
+        if (err) return res.json(err);
+        res.json(savedPost);
+    });
+});
+
+router.get("/posts", (req, res, next) => {
+    Post.find({ user: req.user.id })
+        .populate("user")
+        .exec(function(err, posts) {
+            if (err) return next(err);
+            return res.json(posts);
+        });
 });
 
 module.exports = router;

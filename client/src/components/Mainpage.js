@@ -1,24 +1,18 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { logout } from "../actions";
+import Auth from "./authComponents/Auth";
+import CreatePost from "./mainComponents/postComponents/CreatePost";
 
 class Mainpage extends Component {
-    handleLogOut(e) {
-        e.preventDefault();
-        this.props.logout();
-    }
     render() {
+        // check if user is already signin
         if (this.props.currentUser === null) {
-            return <Redirect to="/signin" />;
+            return <Auth isSignin={true} />;
         }
-        
+
         return (
-            <div>
-                <h1>Main</h1>
-                <a href="/logout" onClick={this.handleLogOut.bind(this)}>
-                    logout
-                </a>
+            <div className="main-container">
+                <CreatePost />
             </div>
         );
     }
@@ -29,4 +23,4 @@ const mapStateToProps = ({ user }) => {
     return { currentUser, isLoading };
 };
 
-export default connect(mapStateToProps, {logout})(Mainpage);
+export default connect(mapStateToProps)(Mainpage);

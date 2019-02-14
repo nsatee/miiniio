@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { receivedValue, signinUser } from "../actions";
+import { receivedValue, signinUser } from "../../actions";
 
 class Signin extends Component {
     handleValChange = e => {

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { receivedValue, signupNewUser } from "../actions";
-import { Link, Redirect } from "react-router-dom";
+import { receivedValue, signupNewUser } from "../../actions";
+import { Link } from "react-router-dom";
 
 class Signup extends Component {
     handleValChange = e => {
@@ -26,7 +26,6 @@ class Signup extends Component {
             lastname,
             confirmPassword
         });
-        return <Redirect to="/signup" />
     };
 
     render() {
@@ -109,7 +108,7 @@ class Signup extends Component {
                             Register
                         </button>
                         <Link
-                            to="/signin"
+                            to="/"
                             className="extra-link"
                         >
                             Already had an account? Signin
